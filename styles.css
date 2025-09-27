@@ -124,13 +124,16 @@ input[type="checkbox"] {
 .app-footer { color: var(--muted); font-size: 12px; margin-top: 18px; }
 
 @media (max-width: 720px) {
-  input[type="time"] { width: 100%; min-width: 0; }
   .hours-table thead { display: none; }
   .hours-table, .hours-table tbody, .hours-table tr, .hours-table td, .hours-table th { display: block; width: 100%; }
-  .hours-table tr { border: 1px solid var(--border); border-radius: 12px; padding: 8px; margin: 10px 0; background: #ffffff; }
-  .hours-table tbody th { border: none; font-size: 14px; color: var(--text); }
-  .hours-table td { border: none; padding: 8px 4px; display: flex; align-items: center; justify-content: space-between; }
-  .hours-table td .mono { margin-left: 8px; }
+  .hours-table tr { border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin: 12px 0; background: #ffffff; }
+  .hours-table tbody th { border: none; font-size: 15px; color: var(--text); margin-bottom: 8px; }
+  .hours-table td { border: none; padding: 8px 0; display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 10px; }
+  .hours-table td::before { content: attr(data-label); color: var(--muted); font-size: 13px; }
+  .time-field { width: 100%; }
+  .time-field .hh, .time-field .mm { width: 100%; }
+  .time-field .colon { width: 12px; text-align: center; }
+  input[type="number"] { width: 100%; }
 }
 
 

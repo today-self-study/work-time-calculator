@@ -44,7 +44,7 @@
           <tbody>
             <tr data-day="mon">
               <th scope="row">월</th>
-              <td>
+              <td data-label="출근">
                 <div class="time-field">
                   <select id="mon-start-h" class="hh" aria-label="월요일 출근 시"></select>
                   <span class="colon">:</span>
@@ -52,7 +52,7 @@
                 </div>
                 <input id="mon-start" type="hidden" />
               </td>
-              <td>
+              <td data-label="퇴근">
                 <div class="time-field">
                   <select id="mon-end-h" class="hh" aria-label="월요일 퇴근 시"></select>
                   <span class="colon">:</span>
@@ -60,14 +60,14 @@
                 </div>
                 <input id="mon-end" type="hidden" />
               </td>
-              <td class="center"><input id="mon-lunch" type="checkbox" aria-label="월요일 점심 여부" /></td>
-              <td class="center"><input id="mon-dinner" type="checkbox" aria-label="월요일 저녁 여부" /></td>
-              <td class="mono"><span id="mon-total">0:00</span></td>
-              <td class="mono"><span id="mon-remaining">0:00</span></td>
+              <td class="center" data-label="점심(-1h)"><input id="mon-lunch" type="checkbox" aria-label="월요일 점심 여부" /></td>
+              <td class="center" data-label="저녁(-30m)"><input id="mon-dinner" type="checkbox" aria-label="월요일 저녁 여부" /></td>
+              <td class="mono" data-label="실 근무"><span id="mon-total">0:00</span></td>
+              <td class="mono" data-label="잔여(주간)"><span id="mon-remaining">0:00</span></td>
             </tr>
             <tr data-day="tue">
               <th scope="row">화</th>
-              <td>
+              <td data-label="출근">
                 <div class="time-field">
                   <select id="tue-start-h" class="hh" aria-label="화요일 출근 시"></select>
                   <span class="colon">:</span>
@@ -75,7 +75,7 @@
                 </div>
                 <input id="tue-start" type="hidden" />
               </td>
-              <td>
+              <td data-label="퇴근">
                 <div class="time-field">
                   <select id="tue-end-h" class="hh" aria-label="화요일 퇴근 시"></select>
                   <span class="colon">:</span>
@@ -83,14 +83,14 @@
                 </div>
                 <input id="tue-end" type="hidden" />
               </td>
-              <td class="center"><input id="tue-lunch" type="checkbox" aria-label="화요일 점심 여부" /></td>
-              <td class="center"><input id="tue-dinner" type="checkbox" aria-label="화요일 저녁 여부" /></td>
-              <td class="mono"><span id="tue-total">0:00</span></td>
-              <td class="mono"><span id="tue-remaining">0:00</span></td>
+              <td class="center" data-label="점심(-1h)"><input id="tue-lunch" type="checkbox" aria-label="화요일 점심 여부" /></td>
+              <td class="center" data-label="저녁(-30m)"><input id="tue-dinner" type="checkbox" aria-label="화요일 저녁 여부" /></td>
+              <td class="mono" data-label="실 근무"><span id="tue-total">0:00</span></td>
+              <td class="mono" data-label="잔여(주간)"><span id="tue-remaining">0:00</span></td>
             </tr>
             <tr data-day="wed">
               <th scope="row">수</th>
-              <td>
+              <td data-label="출근">
                 <div class="time-field">
                   <select id="wed-start-h" class="hh" aria-label="수요일 출근 시"></select>
                   <span class="colon">:</span>
@@ -98,7 +98,7 @@
                 </div>
                 <input id="wed-start" type="hidden" />
               </td>
-              <td>
+              <td data-label="퇴근">
                 <div class="time-field">
                   <select id="wed-end-h" class="hh" aria-label="수요일 퇴근 시"></select>
                   <span class="colon">:</span>
@@ -106,14 +106,14 @@
                 </div>
                 <input id="wed-end" type="hidden" />
               </td>
-              <td class="center"><input id="wed-lunch" type="checkbox" aria-label="수요일 점심 여부" /></td>
-              <td class="center"><input id="wed-dinner" type="checkbox" aria-label="수요일 저녁 여부" /></td>
-              <td class="mono"><span id="wed-total">0:00</span></td>
-              <td class="mono"><span id="wed-remaining">0:00</span></td>
+              <td class="center" data-label="점심(-1h)"><input id="wed-lunch" type="checkbox" aria-label="수요일 점심 여부" /></td>
+              <td class="center" data-label="저녁(-30m)"><input id="wed-dinner" type="checkbox" aria-label="수요일 저녁 여부" /></td>
+              <td class="mono" data-label="실 근무"><span id="wed-total">0:00</span></td>
+              <td class="mono" data-label="잔여(주간)"><span id="wed-remaining">0:00</span></td>
             </tr>
             <tr data-day="thu">
               <th scope="row">목</th>
-              <td>
+              <td data-label="출근">
                 <div class="time-field">
                   <select id="thu-start-h" class="hh" aria-label="목요일 출근 시"></select>
                   <span class="colon">:</span>
@@ -121,7 +121,7 @@
                 </div>
                 <input id="thu-start" type="hidden" />
               </td>
-              <td>
+              <td data-label="퇴근">
                 <div class="time-field">
                   <select id="thu-end-h" class="hh" aria-label="목요일 퇴근 시"></select>
                   <span class="colon">:</span>
@@ -129,14 +129,14 @@
                 </div>
                 <input id="thu-end" type="hidden" />
               </td>
-              <td class="center"><input id="thu-lunch" type="checkbox" aria-label="목요일 점심 여부" /></td>
-              <td class="center"><input id="thu-dinner" type="checkbox" aria-label="목요일 저녁 여부" /></td>
-              <td class="mono"><span id="thu-total">0:00</span></td>
-              <td class="mono"><span id="thu-remaining">0:00</span></td>
+              <td class="center" data-label="점심(-1h)"><input id="thu-lunch" type="checkbox" aria-label="목요일 점심 여부" /></td>
+              <td class="center" data-label="저녁(-30m)"><input id="thu-dinner" type="checkbox" aria-label="목요일 저녁 여부" /></td>
+              <td class="mono" data-label="실 근무"><span id="thu-total">0:00</span></td>
+              <td class="mono" data-label="잔여(주간)"><span id="thu-remaining">0:00</span></td>
             </tr>
             <tr data-day="fri">
               <th scope="row">금</th>
-              <td>
+              <td data-label="출근">
                 <div class="time-field">
                   <select id="fri-start-h" class="hh" aria-label="금요일 출근 시"></select>
                   <span class="colon">:</span>
@@ -144,7 +144,7 @@
                 </div>
                 <input id="fri-start" type="hidden" />
               </td>
-              <td>
+              <td data-label="퇴근">
                 <div class="time-field">
                   <select id="fri-end-h" class="hh" aria-label="금요일 퇴근 시"></select>
                   <span class="colon">:</span>
@@ -152,10 +152,10 @@
                 </div>
                 <input id="fri-end" type="hidden" />
               </td>
-              <td class="center"><input id="fri-lunch" type="checkbox" aria-label="금요일 점심 여부" /></td>
-              <td class="center"><input id="fri-dinner" type="checkbox" aria-label="금요일 저녁 여부" /></td>
-              <td class="mono"><span id="fri-total">0:00</span></td>
-              <td class="mono"><span id="fri-remaining">0:00</span></td>
+              <td class="center" data-label="점심(-1h)"><input id="fri-lunch" type="checkbox" aria-label="금요일 점심 여부" /></td>
+              <td class="center" data-label="저녁(-30m)"><input id="fri-dinner" type="checkbox" aria-label="금요일 저녁 여부" /></td>
+              <td class="mono" data-label="실 근무"><span id="fri-total">0:00</span></td>
+              <td class="mono" data-label="잔여(주간)"><span id="fri-remaining">0:00</span></td>
             </tr>
           </tbody>
         </table>
