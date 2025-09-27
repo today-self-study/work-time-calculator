@@ -139,6 +139,13 @@
   }
 
   function bindEvents() {
+    // Force 24-hour display on supported browsers by setting locale
+    try {
+      document.querySelectorAll('input[type="time"]').forEach((el) => {
+        el.setAttribute('lang', 'en-GB');
+      });
+    } catch (_) { /* no-op */ }
+
     const weeklyTargetEl = document.getElementById('weekly-target-hours');
     weeklyTargetEl.addEventListener('input', recalc);
 
