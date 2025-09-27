@@ -186,6 +186,13 @@
   function resetWeek() {
     dayKeys.forEach((k) => {
       const els = getDayElements(k);
+      const sels = getDaySelects(k);
+      if (sels.startH) sels.startH.value = '';
+      if (sels.startM) sels.startM.value = '';
+      if (sels.endH) sels.endH.value = '';
+      if (sels.endM) sels.endM.value = '';
+      // Sync hidden fields from cleared selects
+      syncHiddenForDay(k);
       els.start.value = '';
       els.end.value = '';
       els.lunch.checked = false;
