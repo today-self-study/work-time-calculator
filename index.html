@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="유연근무제 주간 실근무시간 계산기 (로컬 저장 지원)" />
+    <meta name="theme-color" content="#0f766e" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Work Time Calculator · 주간 실근무 계산기</title>
+  </head>
+  <body>
+    <main class="container">
+      <header class="app-header">
+        <h1>Work Time Calculator</h1>
+        <p class="subtitle">주간 목표 대비 실근무시간을 간편하게 계산하세요. (브라우저에만 저장)</p>
+      </header>
+
+      <section class="weekly-target">
+        <label for="weekly-target-hours" class="field-label">주간 목표 시간</label>
+        <div class="target-input-row">
+          <input id="weekly-target-hours" type="number" min="0" step="0.5" inputmode="decimal" aria-describedby="target-help" />
+          <span class="unit">시간</span>
+        </div>
+        <p id="target-help" class="help">기본값 40시간. 필요 시 32/42 등으로 조정하세요.</p>
+      </section>
+
+      <section class="table-wrap">
+        <table class="hours-table" aria-describedby="table-help">
+          <thead>
+            <tr>
+              <th scope="col">요일</th>
+              <th scope="col">출근</th>
+              <th scope="col">퇴근</th>
+              <th scope="col">점심(-1h)</th>
+              <th scope="col">저녁(-30m)</th>
+              <th scope="col">실 근무</th>
+              <th scope="col">잔여(주간)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-day="mon">
+              <th scope="row">월</th>
+              <td><input id="mon-start" type="time" step="60" autocomplete="off" /></td>
+              <td><input id="mon-end" type="time" step="60" autocomplete="off" /></td>
+              <td class="center"><input id="mon-lunch" type="checkbox" aria-label="월요일 점심 여부" /></td>
+              <td class="center"><input id="mon-dinner" type="checkbox" aria-label="월요일 저녁 여부" /></td>
+              <td class="mono"><span id="mon-total">0:00</span></td>
+              <td class="mono"><span id="mon-remaining">0:00</span></td>
+            </tr>
+            <tr data-day="tue">
+              <th scope="row">화</th>
+              <td><input id="tue-start" type="time" step="60" autocomplete="off" /></td>
+              <td><input id="tue-end" type="time" step="60" autocomplete="off" /></td>
+              <td class="center"><input id="tue-lunch" type="checkbox" aria-label="화요일 점심 여부" /></td>
+              <td class="center"><input id="tue-dinner" type="checkbox" aria-label="화요일 저녁 여부" /></td>
+              <td class="mono"><span id="tue-total">0:00</span></td>
+              <td class="mono"><span id="tue-remaining">0:00</span></td>
+            </tr>
+            <tr data-day="wed">
+              <th scope="row">수</th>
+              <td><input id="wed-start" type="time" step="60" autocomplete="off" /></td>
+              <td><input id="wed-end" type="time" step="60" autocomplete="off" /></td>
+              <td class="center"><input id="wed-lunch" type="checkbox" aria-label="수요일 점심 여부" /></td>
+              <td class="center"><input id="wed-dinner" type="checkbox" aria-label="수요일 저녁 여부" /></td>
+              <td class="mono"><span id="wed-total">0:00</span></td>
+              <td class="mono"><span id="wed-remaining">0:00</span></td>
+            </tr>
+            <tr data-day="thu">
+              <th scope="row">목</th>
+              <td><input id="thu-start" type="time" step="60" autocomplete="off" /></td>
+              <td><input id="thu-end" type="time" step="60" autocomplete="off" /></td>
+              <td class="center"><input id="thu-lunch" type="checkbox" aria-label="목요일 점심 여부" /></td>
+              <td class="center"><input id="thu-dinner" type="checkbox" aria-label="목요일 저녁 여부" /></td>
+              <td class="mono"><span id="thu-total">0:00</span></td>
+              <td class="mono"><span id="thu-remaining">0:00</span></td>
+            </tr>
+            <tr data-day="fri">
+              <th scope="row">금</th>
+              <td><input id="fri-start" type="time" step="60" autocomplete="off" /></td>
+              <td><input id="fri-end" type="time" step="60" autocomplete="off" /></td>
+              <td class="center"><input id="fri-lunch" type="checkbox" aria-label="금요일 점심 여부" /></td>
+              <td class="center"><input id="fri-dinner" type="checkbox" aria-label="금요일 저녁 여부" /></td>
+              <td class="mono"><span id="fri-total">0:00</span></td>
+              <td class="mono"><span id="fri-remaining">0:00</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p id="table-help" class="help">출·퇴근 및 식사 체크 변경 시 자동 계산됩니다. 잔여는 해당 요일까지의 누적 기준입니다.</p>
+      </section>
+
+      <section class="controls">
+        <button id="reset-week" class="btn danger" type="button" aria-describedby="reset-help">이번 주 리셋</button>
+        <p id="reset-help" class="help">이번 주 입력값만 초기화합니다. 주간 목표 설정은 유지됩니다.</p>
+      </section>
+
+      <footer class="app-footer">
+        <p>브라우저 로컬 저장소(localStorage)에만 저장됩니다. GitHub Pages에서 작동합니다.</p>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+  </html>
+
+
