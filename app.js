@@ -187,10 +187,10 @@
     dayKeys.forEach((k) => {
       const els = getDayElements(k);
       const sels = getDaySelects(k);
-      if (sels.startH) sels.startH.value = '';
-      if (sels.startM) sels.startM.value = '';
-      if (sels.endH) sels.endH.value = '';
-      if (sels.endM) sels.endM.value = '';
+      if (sels.startH) { sels.startH.selectedIndex = 0; sels.startH.value = ''; }
+      if (sels.startM) { sels.startM.selectedIndex = 0; sels.startM.value = ''; }
+      if (sels.endH) { sels.endH.selectedIndex = 0; sels.endH.value = ''; }
+      if (sels.endM) { sels.endM.selectedIndex = 0; sels.endM.value = ''; }
       // Sync hidden fields from cleared selects
       syncHiddenForDay(k);
       els.start.value = '';
