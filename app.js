@@ -7,6 +7,11 @@
   /**
    * Utils
    */
+  function pad2(n) {
+    const v = Number(n);
+    if (!Number.isFinite(v)) return '';
+    return v < 10 ? '0' + v : String(v);
+  }
   function parseTimeToMinutes(timeStr) {
     if (!timeStr || typeof timeStr !== 'string') return null;
     const [hh, mm] = timeStr.split(':');
@@ -44,6 +49,63 @@
       total: document.getElementById(`${key}-total`),
       remaining: document.getElementById(`${key}-remaining`),
     };
+  }
+
+  function getDaySelects(key) {
+    return {
+      startH: document.getElementById(`${key}-start-h`),
+      startM: document.getElementById(`${key}-start-m`),
+      endH: document.getElementById(`${key}-end-h`),
+      endM: document.getElementById(`${key}-end-m`),
+    };
+  }
+
+  function createOptions(selectEl, start, end, step, placeholder) {
+    if (!selectEl) return;
+    selectEl.innerHTML = '';
+    const ph = document.createElement('option');
+    ph.value = '';
+    ph.textContent = placeholder || '--';
+    selectEl.appendChild(ph);
+    for (let v = start; v <= end; v += step) {
+      const opt = document.createElement('option');
+      opt.value = String(v);
+      opt.textContent = pad2(v);
+      selectEl.appendChild(opt);
+    }
+  }
+
+  function populateTimeSelects() {
+    dayKeys.forEach((k) => {
+      const s = getDaySelects(k);
+      createOptions(s.startH, 0, 23, 1, '시');
+      createOptions(s.endH, 0, 23, 1, '시');
+      createOptions(s.startM, 0, 59, 1, '분');
+      createOptions(s.endM, 0, 59, 1, '분');
+    });
+  }
+
+  function setSelectsFromHidden(key) {
+    const els = getDayElements(key);
+    const sel = getDaySelects(key);
+    if (!sel.startH || !sel.startM || !sel.endH || !sel.endM) return;
+    const [sh, sm] = (els.start.value || '').split(':');
+    const [eh, em] = (els.end.value || '').split(':');
+    if (sh !== undefined && sh !== '') sel.startH.value = String(Number(sh));
+    if (sm !== undefined && sm !== '') sel.startM.value = String(Number(sm));
+    if (eh !== undefined && eh !== '') sel.endH.value = String(Number(eh));
+    if (em !== undefined && em !== '') sel.endM.value = String(Number(em));
+  }
+
+  function syncHiddenForDay(key) {
+    const sel = getDaySelects(key);
+    const els = getDayElements(key);
+    const sh = sel.startH && sel.startH.value !== '' ? pad2(sel.startH.value) : '';
+    const sm = sel.startM && sel.startM.value !== '' ? pad2(sel.startM.value) : '';
+    const eh = sel.endH && sel.endH.value !== '' ? pad2(sel.endH.value) : '';
+    const em = sel.endM && sel.endM.value !== '' ? pad2(sel.endM.value) : '';
+    els.start.value = sh !== '' && sm !== '' ? `${sh}:${sm}` : '';
+    els.end.value = eh !== '' && em !== '' ? `${eh}:${em}` : '';
   }
 
   function loadState() {
@@ -139,21 +201,17 @@
   }
 
   function bindEvents() {
-    // Force 24-hour display on supported browsers by setting locale
-    try {
-      document.querySelectorAll('input[type="time"]').forEach((el) => {
-        el.setAttribute('lang', 'en-GB');
-      });
-    } catch (_) { /* no-op */ }
-
     const weeklyTargetEl = document.getElementById('weekly-target-hours');
     weeklyTargetEl.addEventListener('input', recalc);
 
     dayKeys.forEach((k) => {
       const els = getDayElements(k);
-      ['input', 'change'].forEach((evt) => {
-        els.start.addEventListener(evt, recalc);
-        els.end.addEventListener(evt, recalc);
+      const sels = getDaySelects(k);
+      ['change'].forEach((evt) => {
+        if (sels.startH) sels.startH.addEventListener(evt, () => { syncHiddenForDay(k); recalc(); });
+        if (sels.startM) sels.startM.addEventListener(evt, () => { syncHiddenForDay(k); recalc(); });
+        if (sels.endH) sels.endH.addEventListener(evt, () => { syncHiddenForDay(k); recalc(); });
+        if (sels.endM) sels.endM.addEventListener(evt, () => { syncHiddenForDay(k); recalc(); });
         els.lunch.addEventListener(evt, recalc);
         els.dinner.addEventListener(evt, recalc);
       });
@@ -163,7 +221,9 @@
   }
 
   // Bootstrap
+  populateTimeSelects();
   loadState();
+  dayKeys.forEach(setSelectsFromHidden);
   bindEvents();
   recalc();
 })();
