@@ -249,6 +249,17 @@
         resetDay(key);
       });
     });
+
+    // Defensive: delegate clicks for dynamically rendered layouts
+    document.addEventListener('click', (e) => {
+      const t = e.target;
+      const btn = t && typeof t.closest === 'function' ? t.closest('.day-reset') : null;
+      if (btn) {
+        e.preventDefault();
+        const key = btn.getAttribute('data-day');
+        if (key) resetDay(key);
+      }
+    });
   }
 
   // Bootstrap
