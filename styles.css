@@ -99,6 +99,8 @@ input[type="number"] { width: 160px; min-width: 120px; }
   font-weight: 600;
 }
 .hours-table tbody th { width: 52px; white-space: nowrap; }
+.day-title { display: inline-flex; align-items: center; gap: 8px; }
+.btn.reset { padding: 4px 8px; font-size: 12px; border-radius: 8px; }
 .center { text-align: center; }
 .mono { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
 
@@ -128,6 +130,7 @@ input[type="checkbox"] {
   .hours-table, .hours-table tbody, .hours-table tr, .hours-table td, .hours-table th { display: block; width: 100%; }
   .hours-table tr { border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin: 12px 0; background: #ffffff; }
   .hours-table tbody th { border: none; font-size: 15px; color: var(--text); margin-bottom: 8px; }
+  .hours-table tbody th .day-title { width: 100%; display: flex; align-items: center; justify-content: space-between; }
   .hours-table td { border: none; padding: 8px 0; display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 10px; }
   .hours-table td::before { content: attr(data-label); color: var(--muted); font-size: 13px; }
   .time-field { width: 100%; }

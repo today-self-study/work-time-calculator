@@ -183,6 +183,21 @@
     saveState();
   }
 
+  function resetDay(key) {
+    const els = getDayElements(key);
+    const sels = getDaySelects(key);
+    if (sels.startH) { sels.startH.selectedIndex = 0; sels.startH.value = ''; }
+    if (sels.startM) { sels.startM.selectedIndex = 0; sels.startM.value = ''; }
+    if (sels.endH) { sels.endH.selectedIndex = 0; sels.endH.value = ''; }
+    if (sels.endM) { sels.endM.selectedIndex = 0; sels.endM.value = ''; }
+    syncHiddenForDay(key);
+    els.start.value = '';
+    els.end.value = '';
+    els.lunch.checked = false;
+    els.dinner.checked = false;
+    recalc();
+  }
+
   function resetWeek() {
     dayKeys.forEach((k) => {
       const els = getDayElements(k);
@@ -225,6 +240,15 @@
     });
 
     document.getElementById('reset-week').addEventListener('click', resetWeek);
+
+    // Day-specific reset buttons
+    document.querySelectorAll('.day-reset').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.getAttribute('data-day');
+        if (!key) return;
+        resetDay(key);
+      });
+    });
   }
 
   // Bootstrap
